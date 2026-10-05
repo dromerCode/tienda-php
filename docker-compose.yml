@@ -13,6 +13,7 @@ services:
     volumes:
       - tienda_data:/var/lib/mysql
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./db/datos.sql:/docker-entrypoint-initdb.d/02-datos.sql:ro
 
 volumes:
   tienda_data:

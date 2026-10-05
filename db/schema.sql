@@ -16,10 +16,11 @@ CREATE TABLE cliente (
   apellido    VARCHAR(120) NOT NULL,
   direccion   VARCHAR(255) NOT NULL,
   telefono    VARCHAR(20)  NOT NULL,
-  -- En un entorno real guarda solo un token del proveedor de pagos
-  -- o los últimos 4 dígitos, nunca el número completo.
-  tarjeta     VARCHAR(255) NULL,
-  PRIMARY KEY (id_cliente)
+  email       VARCHAR(120) NOT NULL,
+  -- Hash de password_hash(), nunca la contraseña en texto plano
+  contrasena  VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id_cliente),
+  UNIQUE KEY uq_cliente_email (email)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------

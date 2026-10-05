@@ -9,4 +9,6 @@ if ($page == 'login' || $page == 'registro' || $page == 'logout') {
     require __DIR__ . '/productoController.php';
 } elseif ($page == 'carrito') {
     require __DIR__ . '/carritoController.php';
+} elseif ($page == 'finalizar_compra' || $page == 'pedido') {
+    require __DIR__ . '/compraController.php';
 }

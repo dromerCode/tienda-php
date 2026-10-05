@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pedido Realizado - Tienda</title>
+        <style>
+            body { font-family: sans-serif; margin: 2rem; background: #f8f9fa; }
+            .container { max-width: 700px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px;
+  border: 1px solid #ddd; }
+            .alert-success { background: #d4edda; color: #155724; padding: 1rem; border-radius: 6px; margin-bottom:
+  1.5rem; text-align: center; font-weight: bold; }
+            table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+            th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #eee; }
+            th { background: #f1f3f5; }
+            .text-right { text-align: right; }
+            .total { font-size: 1.25rem; font-weight: bold; color: #2c3e50; }
+            .btn { display: inline-block; background: #007bff; color: white; padding: 0.6rem 1.2rem; text-
+  decoration: none; border-radius: 4px; margin-top: 1.5rem; }
+            .btn:hover { background: #0056b3; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="alert-success">
+                ✓ ¡Gracias por tu compra, <?= htmlspecialchars($_SESSION['nombre'] ?? 'Cliente') ?>!
+            </div>
+
+            <h2>Detalle del Pedido #<?= (int)$factura->getId() ?></h2>
+            <p>Tu factura y compra han sido registradas con éxito.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th class="text-right">Cantidad</th>
+                        <th class="text-right">Precio Unitario</th>
+                        <th class="text-right">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($lineas as $l): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($l['nombre']) ?></td>
+                            <td class="text-right"><?= (int)$l['cantidad'] ?></td>
+                            <td class="text-right"><?= number_format((float)$l['precio_unitario'], 2, ',', '.') ?>
+  €</td>
+                            <td class="text-right"><?= number_format((float)$l['subtotal'], 2, ',', '.') ?> €</td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right total">Total pagado:</td>
+                        <td class="text-right total"><?= number_format($factura->getPrecioFinal(), 2, ',', '.') ?>
+  €</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div style="text-align: center;">
+                <a href="index.php?page=productos" class="btn">Volver al Catálogo</a>
+            </div>
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,36 @@
+<!-- Vista del carrito: solo pinta las variables que prepara carritoController ($carrito, $lineas, $productos) -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi carrito</title>
+</head>
+<body>
+    <h1>Mi carrito</h1>
+
+    <?php if (empty($lineas)): ?>
+        <p>Tu carrito está vacío.</p>
+    <?php else: ?>
+        <table>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+            </tr>
+            <?php foreach ($lineas as $linea): ?>
+                <tr>
+                    <td><?= htmlspecialchars($productos[$linea->getIdProducto()]->getNombre()) ?></td>
+                    <td><?= $linea->getCantidad() ?></td>
+                    <td><?= number_format($linea->getPrecioUnitario(), 2, ',', '.') ?> €</td>
+                    <td><?= number_format($linea->getSubtotal(), 2, ',', '.') ?> €</td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <p><strong>Total: <?= number_format($carrito->getPrecioFinal(), 2, ',', '.') ?> €</strong></p>
+    <?php endif; ?>
+
+    <br><a href="index.php?page=productos">&larr; Seguir comprando</a>
+</body>
+</html>

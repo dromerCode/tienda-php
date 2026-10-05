@@ -7,18 +7,24 @@
     <title>Iniciar sesión</title>
 </head>
 <body>
-    <h1>Iniciar sesión</h1>
-    <form action="index.php?page=login" method="post">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required><br>
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" name="contrasena" id="contrasena" required><br>
-        <input type="submit" value="Iniciar sesión">
-    </form>
-    <?php if ($mensaje): ?>
-        <p><strong><?= htmlspecialchars($mensaje) ?></strong></p>
+    <?php if (isset($_SESSION['id_cliente'])): ?>
+        <!-- Ya ha iniciado sesión: no tiene sentido enseñar el formulario -->
+        <h1>Hola, <?= htmlspecialchars($_SESSION['nombre']) ?></h1>
+        <p><a href="index.php?page=logout">Cerrar sesión</a></p>
+    <?php else: ?>
+        <h1>Iniciar sesión</h1>
+        <form action="index.php?page=login" method="post">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required><br>
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" name="contrasena" id="contrasena" required><br>
+            <input type="submit" value="Iniciar sesión">
+        </form>
+        <?php if ($mensaje): ?>
+            <p><strong><?= htmlspecialchars($mensaje) ?></strong></p>
+        <?php endif; ?>
+        <p><a href="index.php?page=registro">Registrarse</a> para crear una cuenta.</p>
+        <br><a href="index.php">Volver</a>
     <?php endif; ?>
-    <p><a href="index.php?page=registro">Registrarse</a> para crear una cuenta.</p>
-    <br><a href="index.php">Volver</a>
 </body>
 </html>

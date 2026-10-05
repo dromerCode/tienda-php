@@ -28,5 +28,26 @@ class CarritoRepository {
         $stmt->execute();
         return $this->db->insert_id;
     }
+
+    public function findLineas(int $idCarrito): array {
+        $stmt = $this->db->prepare("SELECT lp.id_linea, lp.id_carrito, lp.id_producto, lp.cantidad, lp.precio_unitario, lp.subtotal FROM linea_producto lp WHERE lp.id_carrito = ?");
+        $stmt->bind_param("i", $idCarrito);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $lineas = [];
+        while ($fila = $result->fetch_assoc()) {
+            $lineas[] = new LineaProducto($fila['id_linea'], $fila['id_carrito'], $fila['id_producto'], $fila['cantidad'], $fila['precio_unitario'], $fila['subtotal']);
+        }
+        return $lineas;
+    }
+
+    // Añade 1 unidad. Si el producto ya está en el carrito, choca con el UNIQUE
+    // (id_carrito, id_producto) y en vez de dar error suma 1 a la cantidad.
+    public function addProducto(int $idCarrito, int $idProducto, float $precioUnitario): void {
+        $stmt = $this->db->prepare("INSERT INTO linea_producto (id_carrito, id_producto, cantidad, precio_unitario) VALUES (?, ?, 1, ?) ON DUPLICATE KEY UPDATE cantidad = cantidad + 1");
+        $stmt->bind_param("iid", $idCarrito, $idProducto, $precioUnitario);
+        $stmt->execute();
+    }
 }
 

@@ -18,13 +18,29 @@
                 <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Subtotal</th>
+                <th></th>
             </tr>
             <?php foreach ($lineas as $linea): ?>
                 <tr>
                     <td><?= htmlspecialchars($productos[$linea->getIdProducto()]->getNombre()) ?></td>
-                    <td><?= $linea->getCantidad() ?></td>
+                    <td>
+                        <!-- Los inputs ocultos le dicen al controlador qué hacer y con qué línea -->
+                        <form action="index.php?page=carrito" method="post">
+                            <input type="hidden" name="accion" value="cantidad">
+                            <input type="hidden" name="id_linea" value="<?= $linea->getIdLinea() ?>">
+                            <input type="number" name="cantidad" value="<?= $linea->getCantidad() ?>" min="0" style="width: 4em">
+                            <input type="submit" value="Actualizar">
+                        </form>
+                    </td>
                     <td><?= number_format($linea->getPrecioUnitario(), 2, ',', '.') ?> €</td>
                     <td><?= number_format($linea->getSubtotal(), 2, ',', '.') ?> €</td>
+                    <td>
+                        <form action="index.php?page=carrito" method="post">
+                            <input type="hidden" name="accion" value="quitar">
+                            <input type="hidden" name="id_linea" value="<?= $linea->getIdLinea() ?>">
+                            <input type="submit" value="Quitar">
+                        </form>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </table>

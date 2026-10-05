@@ -18,6 +18,12 @@
             <h1><?= htmlspecialchars($producto->getNombre()) ?></h1>
             <p><?= htmlspecialchars($producto->getDescripcion() ?? 'Sin descripción.') ?></p>
             <p class="precio"><?= number_format($producto->getPrecio(), 2, ',', '.') ?> €</p>
+            <!-- Si no hay sesión, carritoController redirige al login -->
+            <form action="index.php?page=carrito" method="post">
+                <input type="hidden" name="accion" value="anadir">
+                <input type="hidden" name="id_producto" value="<?= $producto->getId() ?>">
+                <input type="submit" value="Añadir al carrito">
+            </form>
         </div>
     </body>
     </html>

@@ -1,0 +1,36 @@
+<!-- Vista de registro: página aparte con el formulario para crear una cuenta -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+</head>
+<body>
+    <h1>Registrarse</h1>
+    <?php if ($mensaje): ?>
+        <p><strong><?= htmlspecialchars($mensaje) ?></strong></p>
+    <?php endif; ?>
+
+    <?php if ($registrado): ?>
+        <p><a href="index.php?page=login">Inicia sesión</a> con tu nueva cuenta.</p>
+    <?php else: ?>
+        <form action="index.php?page=registro" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" required><br>
+            <label for="apellido">Apellido:</label>
+            <input type="text" name="apellido" id="apellido" required><br>
+            <label for="direccion">Dirección:</label>
+            <input type="text" name="direccion" id="direccion" required><br>
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" name="telefono" id="telefono" required><br>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required><br>
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" name="contrasena" id="contrasena" required><br>
+            <input type="submit" value="Registrarse">
+        </form>
+    <?php endif; ?>
+    <br><a href="index.php">Volver</a>
+</body>
+</html>

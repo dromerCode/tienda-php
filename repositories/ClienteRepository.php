@@ -27,8 +27,8 @@ class ClienteRepository{
         $direccion = $cliente->getDireccion();
         $telefono = $cliente->getTelefono();
         $email = $cliente->getEmail();
-        $password = $cliente->getPassword();
-        $stmt->bind_param("ssssss", $nombre, $apellido, $direccion, $telefono, $email, $password);
+        $contrasena = $cliente->getPassword();
+        $stmt->bind_param("ssssss", $nombre, $apellido, $direccion, $telefono, $email, $contrasena);
         $stmt->execute();
     }
 }

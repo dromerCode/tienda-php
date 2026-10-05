@@ -49,5 +49,27 @@ class CarritoRepository {
         $stmt->bind_param("iid", $idCarrito, $idProducto, $precioUnitario);
         $stmt->execute();
     }
+
+    public function quitarLinea(int $idLinea): void {
+        $stmt = $this->db->prepare("DELETE FROM linea_producto WHERE id_linea = ?");
+        $stmt->bind_param("i", $idLinea);
+        $stmt->execute();
+    }
+
+    public function cambiarCantidad(int $idLinea, int $nuevaCantidad): void {
+        if ($nuevaCantidad <= 0) {
+            $this->quitarLinea($idLinea);
+        } else {
+            $stmt = $this->db->prepare("UPDATE linea_producto SET cantidad = ? WHERE id_linea = ?");
+            $stmt->bind_param("ii", $nuevaCantidad, $idLinea);
+            $stmt->execute();
+        }
+    }
+
+    public function actualizarPrecioFinal(int $idCarrito): void {
+        $stmt = $this->db->prepare("UPDATE carrito c SET c.precio_final = (SELECT COALESCE(SUM(lp.subtotal), 0) FROM linea_producto lp WHERE lp.id_carrito = c.id_carrito) WHERE c.id_carrito = ?");
+        $stmt->bind_param("i", $idCarrito);
+        $stmt->execute();
+    }
 }
 

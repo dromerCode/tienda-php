@@ -1,0 +1,35 @@
+<!-- Vista de mis pedidos: solo pinta las variables que prepara compraController ($facturas) -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis pedidos</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <?php require __DIR__ . '/header.phtml'; ?>
+    <h1>Mis pedidos</h1>
+
+    <?php if (empty($facturas)): ?>
+        <p>Todavía no has hecho ningún pedido.</p>
+    <?php else: ?>
+        <table>
+            <tr>
+                <th>Nº de pedido</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+            <?php foreach ($facturas as $factura): ?>
+                <tr>
+                    <td><?= $factura->getId() ?></td>
+                    <td><?= number_format($factura->getPrecioFinal(), 2, ',', '.') ?> €</td>
+                    <td><a href="index.php?page=pedido&id=<?= $factura->getId() ?>">Ver detalle</a></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
+
+    <br><a href="index.php?page=productos">&larr; Seguir comprando</a>
+</body>
+</html>

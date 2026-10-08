@@ -44,3 +44,8 @@ if ($page === 'finalizar_compra') {
 
         require __DIR__ . '/../views/pedidoView.phtml';
     }
+
+    if ($page === 'mis_pedidos') {
+        $facturas = $facturaRepo->findByCliente($idCliente);
+        require __DIR__ . '/../views/misPedidosView.phtml';
+    }

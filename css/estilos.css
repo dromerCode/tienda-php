@@ -1,0 +1,209 @@
+/* Estilos generales */
+body {
+    font-family: sans-serif;
+    margin: 2rem;
+    background: beige;
+    color: black;
+}
+
+/* Cabecera compartida */
+.cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid navy;
+}
+
+.cabecera h1 {
+    margin: 0;
+}
+
+.cabecera h1 a {
+    text-decoration: none;
+    color: navy;
+}
+
+.cabecera nav a {
+    color: blue;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cabecera nav a:hover {
+    text-decoration: underline;
+}
+
+/* Catálogo de productos */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.card {
+    background: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.precio {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: navy;
+}
+
+/* Detalle de producto */
+.detalle {
+    background: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.precio-grande {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: green;
+    margin: 1rem 0;
+}
+
+.volver {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: blue;
+    text-decoration: none;
+}
+
+.volver:hover {
+    text-decoration: underline;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    background: royalblue;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn:hover {
+    background: navy;
+}
+
+.btn-comprar {
+    background: green;
+    padding: 0.6rem 1.2rem;
+    font-weight: bold;
+}
+
+.btn-comprar:hover {
+    background: darkgreen;
+}
+
+/* Tablas (Carrito y Pedido) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: white;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid lightgray;
+}
+
+th {
+    background: cornsilk;
+    color: navy;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.total {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: navy;
+}
+
+table input[type="number"] {
+    width: 4em;
+    padding: 0.2rem;
+}
+
+/* Contenedor del pedido realizado */
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+.alert-success {
+    background: lightgreen;
+    color: darkgreen;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Formularios (Login y Registro) */
+.formulario {
+    background: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 400px;
+    margin: 1.5rem auto;
+}
+
+.formulario h1 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: navy;
+}
+
+.formulario label {
+    display: block;
+    margin-top: 0.8rem;
+    margin-bottom: 0.2rem;
+    font-weight: bold;
+}
+
+.formulario input[type="text"],
+.formulario input[type="email"],
+.formulario input[type="password"],
+.formulario input[type="tel"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid gray;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.formulario input[type="submit"] {
+    margin-top: 1.2rem;
+    width: 100%;
+}

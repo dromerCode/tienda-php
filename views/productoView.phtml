@@ -4,25 +4,20 @@
     <head>
         <meta charset="UTF-8">
         <title><?= htmlspecialchars($producto->getNombre()) ?> - Detalle</title>
-        <style>
-            body { font-family: sans-serif; margin: 2rem; background: #f8f9fa; }
-            .detalle { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 2rem; max-width:
-  600px; margin: 0 auto; }
-            .precio { font-size: 1.5rem; font-weight: bold; color: #28a745; margin: 1rem 0; }
-            .volver { display: inline-block; margin-bottom: 1rem; color: #007bff; text-decoration: none; }
-        </style>
+        <link rel="stylesheet" href="css/estilos.css">
     </head>
     <body>
         <?php require __DIR__ . '/header.phtml'; ?>
         <div class="detalle">
+            <a class="volver" href="index.php?page=productos">&larr; Volver al catálogo</a>
             <h1><?= htmlspecialchars($producto->getNombre()) ?></h1>
             <p><?= htmlspecialchars($producto->getDescripcion() ?? 'Sin descripción.') ?></p>
-            <p class="precio"><?= number_format($producto->getPrecio(), 2, ',', '.') ?> €</p>
+            <p class="precio-grande"><?= number_format($producto->getPrecio(), 2, ',', '.') ?> €</p>
             <!-- Si no hay sesión, carritoController redirige al login -->
             <form action="index.php?page=carrito" method="post">
                 <input type="hidden" name="accion" value="anadir">
                 <input type="hidden" name="id_producto" value="<?= $producto->getId() ?>">
-                <input type="submit" value="Añadir al carrito">
+                <input type="submit" class="btn" value="Añadir al carrito">
             </form>
         </div>
     </body>

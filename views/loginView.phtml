@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
     <?php require __DIR__ . '/header.phtml'; ?>
@@ -13,19 +14,20 @@
              El saludo y "Cerrar sesión" ya están en la cabecera. -->
         <p>Ya has iniciado sesión.</p>
     <?php else: ?>
-        <h1>Iniciar sesión</h1>
-        <form action="index.php?page=login" method="post">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required><br>
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" name="contrasena" id="contrasena" required><br>
-            <input type="submit" value="Iniciar sesión">
-        </form>
-        <?php if ($mensaje): ?>
-            <p><strong><?= htmlspecialchars($mensaje) ?></strong></p>
-        <?php endif; ?>
-        <p><a href="index.php?page=registro">Registrarse</a> para crear una cuenta.</p>
-        <br><a href="index.php">Volver</a>
+        <div class="formulario">
+            <h1>Iniciar sesión</h1>
+            <form action="index.php?page=login" method="post">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" name="contrasena" id="contrasena" required>
+                <input type="submit" class="btn" value="Iniciar sesión">
+            </form>
+            <?php if ($mensaje): ?>
+                <p style="color: red;"><strong><?= htmlspecialchars($mensaje) ?></strong></p>
+            <?php endif; ?>
+            <p><a href="index.php?page=registro">Registrarse</a> para crear una cuenta.</p>
+        </div>
     <?php endif; ?>
 </body>
 </html>

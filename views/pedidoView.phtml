@@ -20,6 +20,7 @@
         </style>
     </head>
     <body>
+        <?php require __DIR__ . '/header.phtml'; ?>
         <div class="container">
             <div class="alert-success">
                 ✓ ¡Gracias por tu compra, <?= htmlspecialchars($_SESSION['nombre'] ?? 'Cliente') ?>!

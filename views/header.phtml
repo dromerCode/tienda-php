@@ -1,0 +1,21 @@
+<div
+    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #ddd;">
+    <h1 style="margin: 0;">
+        <a href="index.php?page=productos">Tienda online</a>
+    </h1>
+    <nav>
+        <?php if (isset($_SESSION['id_cliente'])): ?>
+        <span>Hola,
+            <strong><?= htmlspecialchars($_SESSION['nombre'] ?? 'Cliente') ?></strong>
+        </span>
+        |
+        <a href="index.php?page=carrito">🛒 Ver carrito</a>
+        |
+        <a href="index.php?page=logout">Cerrar sesión</a>
+    <?php else: ?>
+        <a href="index.php?page=login">Iniciar sesión</a>
+        |
+        <a href="index.php?page=registro">Registrarse</a>
+        <?php endif; ?>
+    </nav>
+</div>

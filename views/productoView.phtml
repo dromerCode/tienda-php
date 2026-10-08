@@ -14,7 +14,10 @@
     </head>
     <body>
         <div class="detalle">
-            <a class="volver" href="index.php?page=productos">&larr; Volver al catálogo</a>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                <a class="volver" href="index.php?page=productos">&larr; Volver al catálogo</a>
+                <a class="volver" href="index.php?page=carrito">🛒 Ver carrito</a>
+            </div>
             <h1><?= htmlspecialchars($producto->getNombre()) ?></h1>
             <p><?= htmlspecialchars($producto->getDescripcion() ?? 'Sin descripción.') ?></p>
             <p class="precio"><?= number_format($producto->getPrecio(), 2, ',', '.') ?> €</p>

@@ -1,0 +1,42 @@
+<!-- Detalle de un pedido para el admin: $factura, $cliente y $lineas vienen de adminController -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido <?= $factura->getId() ?></title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <?php require __DIR__ . '/adminMenu.phtml'; ?>
+    <div class="contenido">
+        <a href="index.php?page=admin">&larr; Volver</a>
+        <h1>Pedido nº <?= $factura->getId() ?></h1>
+
+        <h2>Datos del cliente</h2>
+        <p><strong>Nombre:</strong> <?= htmlspecialchars($cliente->getNombre()) ?> <?= htmlspecialchars($cliente->getApellido()) ?></p>
+        <p><strong>Email:</strong> <?= htmlspecialchars($cliente->getEmail()) ?></p>
+        <p><strong>Teléfono:</strong> <?= htmlspecialchars($cliente->getTelefono()) ?></p>
+        <p><strong>Dirección:</strong> <?= htmlspecialchars($cliente->getDireccion()) ?></p>
+
+        <h2>Productos</h2>
+        <table>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Subtotal</th>
+            </tr>
+            <?php foreach ($lineas as $l): ?>
+                <tr>
+                    <td><?= htmlspecialchars($l['nombre']) ?></td>
+                    <td><?= $l['cantidad'] ?></td>
+                    <td><?= number_format($l['precio_unitario'], 2, ',', '.') ?> €</td>
+                    <td><?= number_format($l['subtotal'], 2, ',', '.') ?> €</td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <p class="total">Total: <?= number_format($factura->getPrecioFinal(), 2, ',', '.') ?> €</p>
+    </div>
+</body>
+</html>

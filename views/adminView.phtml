@@ -1,0 +1,64 @@
+<!-- Panel de admin: muestra $pedidos y $clientes que prepara adminController -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de administración</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <?php require __DIR__ . '/adminMenu.phtml'; ?>
+    <div class="contenido">
+        <h1>Panel de administración</h1>
+
+        <h2>Todos los pedidos</h2>
+        <?php if (empty($pedidos)): ?>
+            <p>Todavía no hay ningún pedido.</p>
+        <?php else: ?>
+            <table>
+                <tr>
+                    <th>Nº de pedido</th>
+                    <th>Cliente</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+                <?php foreach ($pedidos as $p): ?>
+                    <tr>
+                        <td><?= $p['id_factura'] ?></td>
+                        <td><?= htmlspecialchars($p['nombre']) ?> <?= htmlspecialchars($p['apellido']) ?></td>
+                        <td><?= htmlspecialchars($p['email']) ?></td>
+                        <td><?= htmlspecialchars($p['telefono']) ?></td>
+                        <td><?= number_format($p['precio_final'], 2, ',', '.') ?> €</td>
+                        <td><a href="index.php?page=admin&id=<?= $p['id_factura'] ?>">Ver detalle</a></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php endif; ?>
+
+        <h2>Clientes</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Rol</th>
+            </tr>
+            <?php foreach ($clientes as $c): ?>
+                <tr>
+                    <td><?= $c->getIdCliente() ?></td>
+                    <td><?= htmlspecialchars($c->getNombre()) ?> <?= htmlspecialchars($c->getApellido()) ?></td>
+                    <td><?= htmlspecialchars($c->getEmail()) ?></td>
+                    <td><?= htmlspecialchars($c->getTelefono()) ?></td>
+                    <td><?= htmlspecialchars($c->getDireccion()) ?></td>
+                    <td><?= $c->getRol() ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</body>
+</html>

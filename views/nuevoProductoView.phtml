@@ -1,0 +1,28 @@
+<!-- Vista solo para el admin: formulario para dar de alta un producto -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo producto</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <?php require __DIR__ . '/adminMenu.phtml'; ?>
+    <div class="contenido">
+        <h1>Nuevo producto</h1>
+        <form action="index.php?page=nuevo_producto" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" required>
+            <label for="descripcion">Descripción:</label>
+            <textarea name="descripcion" id="descripcion" rows="4"></textarea>
+            <label for="precio">Precio (€):</label>
+            <input type="number" name="precio" id="precio" step="0.01" required>
+            <input type="submit" value="Crear producto">
+        </form>
+        <?php if ($mensaje): ?>
+            <p style="color: red;"><strong><?= htmlspecialchars($mensaje) ?></strong></p>
+        <?php endif; ?>
+    </div>
+</body>
+</html>

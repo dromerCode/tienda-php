@@ -1,0 +1,73 @@
+/* Estilos del panel de admin (diferentes a los de la tienda) */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+    background: whitesmoke;
+}
+
+/* Menú de la izquierda */
+.menu {
+    width: 200px;
+    background: darkslategray;
+    padding: 1rem;
+}
+
+.menu h2 {
+    color: white;
+}
+
+.menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+/* Parte de la derecha */
+.contenido {
+    flex: 1;
+    padding: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 0.6rem;
+    text-align: left;
+    border-bottom: 1px solid lightgray;
+}
+
+th {
+    background: darkslategray;
+    color: white;
+}
+
+.total {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Formulario de nuevo producto */
+form label,
+form input,
+form textarea {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea {
+    width: 300px;
+    padding: 0.4rem;
+}

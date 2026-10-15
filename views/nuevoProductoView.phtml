@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuevo producto</title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-    <?php require __DIR__ . '/header.phtml'; ?>
-    <div class="formulario">
+    <?php require __DIR__ . '/adminMenu.phtml'; ?>
+    <div class="contenido">
         <h1>Nuevo producto</h1>
         <form action="index.php?page=nuevo_producto" method="post">
             <label for="nombre">Nombre:</label>
@@ -18,7 +18,7 @@
             <textarea name="descripcion" id="descripcion" rows="4"></textarea>
             <label for="precio">Precio (€):</label>
             <input type="number" name="precio" id="precio" step="0.01" required>
-            <input type="submit" class="btn" value="Crear producto">
+            <input type="submit" value="Crear producto">
         </form>
         <?php if ($mensaje): ?>
             <p style="color: red;"><strong><?= htmlspecialchars($mensaje) ?></strong></p>

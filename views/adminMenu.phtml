@@ -1,12 +1,8 @@
-<!-- Menú lateral del panel de administración (no usa la cabecera de la tienda) -->
-<aside class="menu">
+<!-- Menú del panel de admin, va en lugar de header.phtml -->
+<div class="menu">
     <h2>Panel admin</h2>
-    <p class="usuario"><?= htmlspecialchars($_SESSION['nombre'] ?? 'Admin') ?></p>
-    <nav>
-        <a href="index.php?page=admin#pedidos">📦 Pedidos</a>
-        <a href="index.php?page=admin#clientes">👥 Clientes</a>
-        <a href="index.php?page=nuevo_producto">➕ Nuevo producto</a>
-        <a href="index.php?page=productos">🏬 Volver a la tienda</a>
-        <a href="index.php?page=logout">Cerrar sesión</a>
-    </nav>
-</aside>
+    <a href="index.php?page=admin">Pedidos y clientes</a>
+    <a href="index.php?page=nuevo_producto">Nuevo producto</a>
+    <a href="index.php?page=productos">Volver a la tienda</a>
+    <a href="index.php?page=logout">Cerrar sesión</a>
+</div>

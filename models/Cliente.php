@@ -44,9 +44,6 @@ class Cliente{
     public function getRol(){
         return $this->rol;
     }
-    public function esAdmin(){
-        return $this->rol === 'admin';
-    }
 
 
 }

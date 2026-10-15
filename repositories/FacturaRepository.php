@@ -60,7 +60,7 @@
             return $facturas;
         }
 
-        // Para el panel de admin: todos los pedidos con los datos del cliente que los hizo
+        // Todos los pedidos con los datos del cliente (para el panel de admin)
         public function findAllConCliente(): array {
             $sql = "SELECT f.id_factura, f.precio_final, c.nombre, c.apellido, c.email, c.telefono
                     FROM factura f

@@ -10,7 +10,7 @@ if (($_SESSION['rol'] ?? '') !== 'admin') {
 $facturaRepo = new FacturaRepository($db);
 $clienteRepo = new ClienteRepository($db);
 
-// Con 'id' enseñamos el detalle de un pedido; sin él, la lista de pedidos y clientes
+// Si llega un id enseñamos ese pedido, si no la lista de pedidos y clientes
 if (isset($_GET['id'])) {
     $factura = $facturaRepo->findById((int)$_GET['id']);
 

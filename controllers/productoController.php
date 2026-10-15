@@ -14,16 +14,17 @@
         $mensaje = '';
         if (isset($_POST['nombre'])) {
             $nombre = trim($_POST['nombre']);
-            $descripcion = trim($_POST['descripcion'] ?? '');
-            $precio = str_replace(',', '.', trim($_POST['precio'] ?? ''));
+            $descripcion = trim($_POST['descripcion']);
+            $precio = $_POST['precio'];
 
-            if ($nombre == '' || $precio == '') {
+            if ($nombre == "" || $precio == "") {
                 $mensaje = 'El nombre y el precio son obligatorios';
-            } elseif (!is_numeric($precio) || $precio < 0) {
-                $mensaje = 'El precio tiene que ser un número mayor o igual que 0';
+            } elseif ($precio < 0) {
+                $mensaje = 'El precio no puede ser negativo';
             } else {
-                $id = $repo->save($nombre, $descripcion == '' ? null : $descripcion, (float)$precio);
-                header('Location: index.php?page=producto&id=' . $id);
+                $producto = new Producto(null, $nombre, $descripcion, (float)$precio);
+                $repo->save($producto);
+                header('Location: index.php?page=productos');
                 exit;
             }
         }

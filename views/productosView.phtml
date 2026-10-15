@@ -11,6 +11,9 @@
             <?php foreach ($productos as $p): ?>
                 <div class="card">
                     <div>
+                        <?php if ($p->getImagen()): ?>
+                            <img src="img/productos/<?= htmlspecialchars($p->getImagen()) ?>" alt="<?= htmlspecialchars($p->getNombre()) ?>">
+                        <?php endif; ?>
                         <h3><?= htmlspecialchars($p->getNombre()) ?></h3>
                         <p><?= htmlspecialchars($p->getDescripcion() ?? '') ?></p>
                     </div>

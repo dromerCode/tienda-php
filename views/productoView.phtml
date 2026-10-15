@@ -10,6 +10,9 @@
         <?php require __DIR__ . '/header.phtml'; ?>
         <div class="detalle">
             <a class="volver" href="index.php?page=productos">&larr; Volver al catálogo</a>
+            <?php if ($producto->getImagen()): ?>
+                <img src="img/productos/<?= htmlspecialchars($producto->getImagen()) ?>" alt="<?= htmlspecialchars($producto->getNombre()) ?>">
+            <?php endif; ?>
             <h1><?= htmlspecialchars($producto->getNombre()) ?></h1>
             <p><?= htmlspecialchars($producto->getDescripcion() ?? 'Sin descripción.') ?></p>
             <p class="precio-grande"><?= number_format($producto->getPrecio(), 2, ',', '.') ?> €</p>

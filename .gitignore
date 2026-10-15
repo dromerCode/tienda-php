@@ -1,1 +1,4 @@
 .env
+# Imágenes que se suben desde el panel (FileHelper las llama producto_...)
+# Las de los productos de ejemplo sí se suben
+img/productos/producto_*

@@ -12,13 +12,15 @@
     <div class="contenido">
         <a href="index.php?page=admin_productos">&larr; Volver</a>
         <h1>Nuevo producto</h1>
-        <form action="index.php?page=nuevo_producto" method="post">
+        <form action="index.php?page=nuevo_producto" method="post" enctype="multipart/form-data">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" id="nombre" required>
             <label for="descripcion">Descripción:</label>
             <textarea name="descripcion" id="descripcion" rows="4"></textarea>
             <label for="precio">Precio (€):</label>
             <input type="number" name="precio" id="precio" step="0.01" required>
+            <label for="imagen">Imagen (opcional):</label>
+            <input type="file" name="imagen" id="imagen" accept="image/*">
             <input type="submit" value="Crear producto">
         </form>
         <?php if ($mensaje): ?>

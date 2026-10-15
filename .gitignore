@@ -1,1 +1,4 @@
 .env
+# Imágenes que se suben desde el panel (la carpeta sí se sube)
+img/productos/*
+!img/productos/.gitkeep

@@ -20,6 +20,7 @@
         <table>
             <tr>
                 <th>ID</th>
+                <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Precio</th>
@@ -29,6 +30,13 @@
             <?php foreach ($productos as $p): ?>
                 <tr>
                     <td><?= $p->getId() ?></td>
+                    <td>
+                        <?php if ($p->getImagen()): ?>
+                            <img class="miniatura" src="img/productos/<?= htmlspecialchars($p->getImagen()) ?>" alt="">
+                        <?php else: ?>
+                            Sin imagen
+                        <?php endif; ?>
+                    </td>
                     <td><?= htmlspecialchars($p->getNombre()) ?></td>
                     <td><?= htmlspecialchars($p->getDescripcion() ?? '') ?></td>
                     <td><?= number_format($p->getPrecio(), 2, ',', '.') ?> €</td>

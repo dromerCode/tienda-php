@@ -1,5 +1,6 @@
 <?php
     require_once __DIR__ . '/../repositories/ProductoRepository.php';
+    require_once __DIR__ . '/../helpers/FileHelper.php';
     require_once __DIR__ . '/../db.php';
     $repo = new ProductoRepository($db);
     $page = $_GET['page'] ?? 'productos';
@@ -30,8 +31,14 @@
                 $mensaje = 'El nombre y el precio son obligatorios';
             } elseif ($precio < 0) {
                 $mensaje = 'El precio no puede ser negativo';
+            } elseif ($_FILES['imagen']['name'] != "" && !FileHelper::esImagenValida($_FILES['imagen'])) {
+                $mensaje = 'La imagen tiene que ser jpg, png, gif o webp y pesar menos de 2 MB';
             } else {
-                $producto = new Producto(null, $nombre, $descripcion, (float)$precio);
+                $imagen = null;
+                if ($_FILES['imagen']['name'] != "") {
+                    $imagen = FileHelper::subirImagen($_FILES['imagen']);
+                }
+                $producto = new Producto(null, $nombre, $descripcion, (float)$precio, $imagen);
                 $repo->save($producto);
                 header('Location: index.php?page=admin_productos');
                 exit;
@@ -57,8 +64,16 @@
                 $mensaje = 'El nombre y el precio son obligatorios';
             } elseif ($precio < 0) {
                 $mensaje = 'El precio no puede ser negativo';
+            } elseif ($_FILES['imagen']['name'] != "" && !FileHelper::esImagenValida($_FILES['imagen'])) {
+                $mensaje = 'La imagen tiene que ser jpg, png, gif o webp y pesar menos de 2 MB';
             } else {
-                $producto = new Producto($producto->getId(), $nombre, $descripcion, (float)$precio);
+                // Si suben una imagen nueva, borramos la antigua. Si no, se queda la que tenía
+                $imagen = $producto->getImagen();
+                if ($_FILES['imagen']['name'] != "") {
+                    FileHelper::borrarImagen($producto->getImagen());
+                    $imagen = FileHelper::subirImagen($_FILES['imagen']);
+                }
+                $producto = new Producto($producto->getId(), $nombre, $descripcion, (float)$precio, $imagen);
                 $repo->update($producto);
                 header('Location: index.php?page=admin_productos');
                 exit;
@@ -77,7 +92,11 @@
                 header('Location: index.php?page=admin_productos&error=1');
                 exit;
             }
-            $repo->delete($id);
+            $producto = $repo->findById($id);
+            if ($producto) {
+                FileHelper::borrarImagen($producto->getImagen());
+                $repo->delete($id);
+            }
         }
         header('Location: index.php?page=admin_productos');
         exit;

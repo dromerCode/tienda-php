@@ -12,13 +12,19 @@
     <div class="contenido">
         <a href="index.php?page=admin_productos">&larr; Volver</a>
         <h1>Editar producto</h1>
-        <form action="index.php?page=editar_producto&id=<?= $producto->getId() ?>" method="post">
+        <form action="index.php?page=editar_producto&id=<?= $producto->getId() ?>" method="post" enctype="multipart/form-data">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" id="nombre" value="<?= htmlspecialchars($producto->getNombre()) ?>" required>
             <label for="descripcion">Descripción:</label>
             <textarea name="descripcion" id="descripcion" rows="4"><?= htmlspecialchars($producto->getDescripcion() ?? '') ?></textarea>
             <label for="precio">Precio (€):</label>
             <input type="number" name="precio" id="precio" step="0.01" value="<?= $producto->getPrecio() ?>" required>
+            <label for="imagen">Imagen:</label>
+            <?php if ($producto->getImagen()): ?>
+                <img class="miniatura" src="img/productos/<?= htmlspecialchars($producto->getImagen()) ?>" alt="">
+                <p>Si eliges otra, se cambia por la nueva.</p>
+            <?php endif; ?>
+            <input type="file" name="imagen" id="imagen" accept="image/*">
             <input type="submit" value="Guardar cambios">
         </form>
         <?php if ($mensaje): ?>

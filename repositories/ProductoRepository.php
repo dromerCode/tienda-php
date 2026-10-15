@@ -7,7 +7,7 @@ class ProductoRepository {
         $this->db = $db;
     }
     public function findAll(): array {
-        $sql = "SELECT id_producto, nombre, descripcion, precio FROM producto";
+        $sql = "SELECT id_producto, nombre, descripcion, precio, imagen FROM producto";
         $resultado =$this -> db->query($sql);
         $productos= [];
 
@@ -17,8 +17,8 @@ class ProductoRepository {
                     (int)$row['id_producto'],
                     $row['nombre'],
                     $row['descripcion'],
-                    (float)$row['precio']
-                
+                    (float)$row['precio'],
+                    $row['imagen']
                 );
             }
         }
@@ -26,7 +26,7 @@ class ProductoRepository {
     }
 
     public function findById(int $id): ?Producto {
-        $sql = "SELECT id_producto, nombre, descripcion, precio FROM producto WHERE id_producto = ?";
+        $sql = "SELECT id_producto, nombre, descripcion, precio, imagen FROM producto WHERE id_producto = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->bind_param("i", $id);
             $stmt->execute();
@@ -36,28 +36,31 @@ class ProductoRepository {
                     (int)$row['id_producto'],
                     $row['nombre'],
                     $row['descripcion'],
-                    (float)$row['precio']
+                    (float)$row['precio'],
+                    $row['imagen']
                 );
             }
             return null;
     }
 
     public function save(Producto $producto) {
-        $stmt = $this->db->prepare("INSERT INTO producto (nombre, descripcion, precio) VALUES (?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO producto (nombre, descripcion, precio, imagen) VALUES (?, ?, ?, ?)");
         $nombre = $producto->getNombre();
         $descripcion = $producto->getDescripcion();
         $precio = $producto->getPrecio();
-        $stmt->bind_param("ssd", $nombre, $descripcion, $precio);
+        $imagen = $producto->getImagen();
+        $stmt->bind_param("ssds", $nombre, $descripcion, $precio, $imagen);
         $stmt->execute();
     }
 
     public function update(Producto $producto) {
-        $stmt = $this->db->prepare("UPDATE producto SET nombre = ?, descripcion = ?, precio = ? WHERE id_producto = ?");
+        $stmt = $this->db->prepare("UPDATE producto SET nombre = ?, descripcion = ?, precio = ?, imagen = ? WHERE id_producto = ?");
         $id = $producto->getId();
         $nombre = $producto->getNombre();
         $descripcion = $producto->getDescripcion();
         $precio = $producto->getPrecio();
-        $stmt->bind_param("ssdi", $nombre, $descripcion, $precio, $id);
+        $imagen = $producto->getImagen();
+        $stmt->bind_param("ssdsi", $nombre, $descripcion, $precio, $imagen, $id);
         $stmt->execute();
     }
 

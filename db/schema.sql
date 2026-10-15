@@ -33,6 +33,8 @@ CREATE TABLE producto (
   nombre      VARCHAR(120) NOT NULL,
   descripcion TEXT         NULL,
   precio      DECIMAL(10,2) NOT NULL,
+  -- Nombre del archivo en img/productos (NULL si no tiene imagen)
+  imagen      VARCHAR(255) NULL,
   PRIMARY KEY (id_producto),
   CONSTRAINT chk_producto_precio CHECK (precio >= 0)
 ) ENGINE=InnoDB;

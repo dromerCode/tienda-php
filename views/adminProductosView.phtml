@@ -1,0 +1,47 @@
+<!-- Lista de productos para el admin: $productos y $mensaje vienen de productoController -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <?php require __DIR__ . '/adminMenu.phtml'; ?>
+    <div class="contenido">
+        <h1>Productos</h1>
+        <p><a href="index.php?page=nuevo_producto">+ Añadir producto nuevo</a></p>
+
+        <?php if ($mensaje): ?>
+            <p style="color: red;"><strong><?= htmlspecialchars($mensaje) ?></strong></p>
+        <?php endif; ?>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <?php foreach ($productos as $p): ?>
+                <tr>
+                    <td><?= $p->getId() ?></td>
+                    <td><?= htmlspecialchars($p->getNombre()) ?></td>
+                    <td><?= htmlspecialchars($p->getDescripcion() ?? '') ?></td>
+                    <td><?= number_format($p->getPrecio(), 2, ',', '.') ?> €</td>
+                    <td><a href="index.php?page=editar_producto&id=<?= $p->getId() ?>">Editar</a></td>
+                    <td>
+                        <form action="index.php?page=borrar_producto" method="post" onsubmit="return confirm('¿Seguro que quieres borrar este producto?')">
+                            <input type="hidden" name="id_producto" value="<?= $p->getId() ?>">
+                            <input type="submit" value="Borrar">
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</body>
+</html>

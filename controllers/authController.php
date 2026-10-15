@@ -37,6 +37,8 @@ if ($page === 'login' && isset($_POST['email'])) {
         // El id hará falta en el carrito para saber de quién es
         $_SESSION['id_cliente'] = $cliente->getIdCliente();
         $_SESSION['nombre'] = $cliente->getNombre();
+        // El rol decide qué puede hacer: el admin crea productos, el cliente solo ve y compra
+        $_SESSION['rol'] = $cliente->getRol();
         header("Location: index.php");
         exit;
     }

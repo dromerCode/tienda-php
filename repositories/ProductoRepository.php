@@ -41,4 +41,11 @@ class ProductoRepository {
             }
             return null;
     }
+
+    public function save(string $nombre, ?string $descripcion, float $precio): int {
+        $stmt = $this->db->prepare("INSERT INTO producto (nombre, descripcion, precio) VALUES (?, ?, ?)");
+        $stmt->bind_param("ssd", $nombre, $descripcion, $precio);
+        $stmt->execute();
+        return $this->db->insert_id;
+    }
 }

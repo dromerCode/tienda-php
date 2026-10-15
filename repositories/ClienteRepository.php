@@ -9,7 +9,7 @@ class ClienteRepository{
     }
 
     public function findByEmail(string $email): ?Cliente{
-        $stmt = $this->db->prepare("SELECT id_cliente, nombre, apellido, direccion, telefono, email, contrasena FROM cliente WHERE email = ?");
+        $stmt = $this->db->prepare("SELECT id_cliente, nombre, apellido, direccion, telefono, email, contrasena, rol FROM cliente WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $fila = $stmt->get_result()->fetch_assoc();
@@ -17,7 +17,7 @@ class ClienteRepository{
         if (!$fila) {
             return null;
         }
-        return new Cliente($fila['id_cliente'], $fila['nombre'], $fila['apellido'], $fila['direccion'], $fila['telefono'], $fila['email'], $fila['contrasena']);
+        return new Cliente($fila['id_cliente'], $fila['nombre'], $fila['apellido'], $fila['direccion'], $fila['telefono'], $fila['email'], $fila['contrasena'], $fila['rol']);
     }
 
     public function save(Cliente $cliente){

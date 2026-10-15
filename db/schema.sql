@@ -19,6 +19,8 @@ CREATE TABLE cliente (
   email       VARCHAR(120) NOT NULL,
   -- Hash de password_hash(), nunca la contraseña en texto plano
   contrasena  VARCHAR(255) NOT NULL,
+  -- admin: puede crear productos / cliente: solo ver y comprar
+  rol         ENUM('cliente', 'admin') NOT NULL DEFAULT 'cliente',
   PRIMARY KEY (id_cliente),
   UNIQUE KEY uq_cliente_email (email)
 ) ENGINE=InnoDB;

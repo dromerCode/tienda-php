@@ -8,6 +8,10 @@
             <strong><?= htmlspecialchars($_SESSION['nombre'] ?? 'Cliente') ?></strong>
         </span>
         |
+        <?php if (($_SESSION['rol'] ?? '') === 'admin'): ?>
+        <a href="index.php?page=nuevo_producto">➕ Nuevo producto</a>
+        |
+        <?php endif; ?>
         <a href="index.php?page=carrito">🛒 Ver carrito</a>
         |
         <a href="index.php?page=mis_pedidos">Mis pedidos</a>

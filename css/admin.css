@@ -1,0 +1,146 @@
+/* Estilos del panel de administración (aparte de la tienda) */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+    background: whitesmoke;
+    color: #222;
+}
+
+/* Menú lateral */
+.menu {
+    width: 220px;
+    flex-shrink: 0;
+    background: #1e293b;
+    color: white;
+    padding: 1.5rem 1rem;
+}
+
+.menu h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.menu .usuario {
+    color: lightgray;
+    margin-top: 0.3rem;
+    margin-bottom: 2rem;
+}
+
+.menu nav a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 0.3rem;
+}
+
+.menu nav a:hover {
+    background: #334155;
+}
+
+/* Contenido */
+main {
+    flex: 1;
+    padding: 2rem;
+}
+
+main h1 {
+    margin-top: 0;
+}
+
+main h2 {
+    margin-top: 2rem;
+    color: #1e293b;
+}
+
+.volver {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+/* Recuadros con los totales */
+.resumen {
+    display: flex;
+    gap: 1rem;
+}
+
+.dato {
+    background: white;
+    border-left: 5px solid #2563eb;
+    border-radius: 6px;
+    padding: 1rem 1.5rem;
+    min-width: 140px;
+    color: gray;
+}
+
+.dato span {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1e293b;
+}
+
+.caja {
+    background: white;
+    border-radius: 6px;
+    padding: 1rem 1.5rem;
+}
+
+.caja h2 {
+    margin-top: 0;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 0.7rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    background: #1e293b;
+    color: white;
+}
+
+tr:hover td {
+    background: #f1f5f9;
+}
+
+td a {
+    color: #2563eb;
+}
+
+.derecha {
+    text-align: right;
+}
+
+.fila-total td {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Etiqueta del rol */
+.rol {
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    background: lightgray;
+}
+
+.rol.admin {
+    background: #2563eb;
+    color: white;
+}

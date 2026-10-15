@@ -1,0 +1,49 @@
+<!-- Detalle de un pedido para el admin: $factura, $cliente y $lineas vienen de adminController -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido #<?= (int)$factura->getId() ?> - Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <?php require __DIR__ . '/adminMenu.phtml'; ?>
+    <main>
+        <a class="volver" href="index.php?page=admin">&larr; Volver a los pedidos</a>
+        <h1>Pedido #<?= (int)$factura->getId() ?></h1>
+
+        <div class="caja">
+            <h2>Datos del cliente</h2>
+            <?php if ($cliente): ?>
+                <p><strong>Nombre:</strong> <?= htmlspecialchars($cliente->getNombre() . ' ' . $cliente->getApellido()) ?></p>
+                <p><strong>Email:</strong> <?= htmlspecialchars($cliente->getEmail()) ?></p>
+                <p><strong>Teléfono:</strong> <?= htmlspecialchars($cliente->getTelefono()) ?></p>
+                <p><strong>Dirección:</strong> <?= htmlspecialchars($cliente->getDireccion()) ?></p>
+            <?php endif; ?>
+        </div>
+
+        <h2>Productos</h2>
+        <table>
+            <tr>
+                <th>Producto</th>
+                <th class="derecha">Cantidad</th>
+                <th class="derecha">Precio unitario</th>
+                <th class="derecha">Subtotal</th>
+            </tr>
+            <?php foreach ($lineas as $l): ?>
+                <tr>
+                    <td><?= htmlspecialchars($l['nombre']) ?></td>
+                    <td class="derecha"><?= (int)$l['cantidad'] ?></td>
+                    <td class="derecha"><?= number_format((float)$l['precio_unitario'], 2, ',', '.') ?> €</td>
+                    <td class="derecha"><?= number_format((float)$l['subtotal'], 2, ',', '.') ?> €</td>
+                </tr>
+            <?php endforeach; ?>
+            <tr class="fila-total">
+                <td colspan="3" class="derecha">Total:</td>
+                <td class="derecha"><?= number_format($factura->getPrecioFinal(), 2, ',', '.') ?> €</td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!-- Panel de administración: pinta $pedidos y $clientes que prepara adminController -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de administración</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <?php require __DIR__ . '/adminMenu.phtml'; ?>
+    <main>
+        <h1>Panel de administración</h1>
+
+        <div class="resumen">
+            <div class="dato">
+                <span><?= count($pedidos) ?></span>
+                Pedidos
+            </div>
+            <div class="dato">
+                <span><?= count($clientes) ?></span>
+                Clientes
+            </div>
+        </div>
+
+        <h2 id="pedidos">Todos los pedidos</h2>
+        <?php if (empty($pedidos)): ?>
+            <p>Todavía no hay ningún pedido.</p>
+        <?php else: ?>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Cliente</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+                <?php foreach ($pedidos as $p): ?>
+                    <tr>
+                        <td><?= (int)$p['id_factura'] ?></td>
+                        <td><?= htmlspecialchars($p['nombre'] . ' ' . $p['apellido']) ?></td>
+                        <td><?= htmlspecialchars($p['email']) ?></td>
+                        <td><?= htmlspecialchars($p['telefono']) ?></td>
+                        <td><?= number_format((float)$p['precio_final'], 2, ',', '.') ?> €</td>
+                        <td><a href="index.php?page=admin&id=<?= (int)$p['id_factura'] ?>">Ver detalle</a></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php endif; ?>
+
+        <h2 id="clientes">Clientes</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Rol</th>
+            </tr>
+            <?php foreach ($clientes as $c): ?>
+                <tr>
+                    <td><?= (int)$c->getIdCliente() ?></td>
+                    <td><?= htmlspecialchars($c->getNombre() . ' ' . $c->getApellido()) ?></td>
+                    <td><?= htmlspecialchars($c->getEmail()) ?></td>
+                    <td><?= htmlspecialchars($c->getTelefono()) ?></td>
+                    <td><?= htmlspecialchars($c->getDireccion()) ?></td>
+                    <td><span class="rol <?= $c->getRol() ?>"><?= $c->getRol() ?></span></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </main>
+</body>
+</html>

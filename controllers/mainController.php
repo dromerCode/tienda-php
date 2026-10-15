@@ -11,4 +11,6 @@ if ($page == 'login' || $page == 'registro' || $page == 'logout') {
     require __DIR__ . '/carritoController.php';
 } elseif ($page == 'finalizar_compra' || $page == 'pedido' || $page == 'mis_pedidos') {
     require __DIR__ . '/compraController.php';
+} elseif ($page == 'admin') {
+    require __DIR__ . '/adminController.php';
 }

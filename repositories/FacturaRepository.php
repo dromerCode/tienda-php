@@ -60,6 +60,21 @@
             return $facturas;
         }
 
+        // Para el panel de admin: todos los pedidos con los datos del cliente que los hizo
+        public function findAllConCliente(): array {
+            $sql = "SELECT f.id_factura, f.precio_final, c.nombre, c.apellido, c.email, c.telefono
+                    FROM factura f
+                    JOIN cliente c ON f.id_cliente = c.id_cliente
+                    ORDER BY f.id_factura DESC";
+            $resultado = $this->db->query($sql);
+
+            $pedidos = [];
+            while ($fila = $resultado->fetch_assoc()) {
+                $pedidos[] = $fila;
+            }
+            return $pedidos;
+        }
+
         public function findLineasByFactura(int $idFactura): array {
             $sql = "SELECT lp.cantidad, lp.precio_unitario, lp.subtotal, p.nombre
                     FROM factura f
